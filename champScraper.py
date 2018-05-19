@@ -21,7 +21,7 @@ def getChamps():
 	for tr in champList.find_all('tr'):
 		champData = tr.find('a')
 		champLinks.append('http://leagueoflegends.wikia.com' + champData.get('href'))	# format link
-	del champLinks[0]
+	del champLinks[0]	# delete unnecessary link
 	return champLinks
 
 print(getChamps())
