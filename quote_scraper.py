@@ -42,10 +42,13 @@ given wikia link
 """
 def get_champ_quotes(champ_link):
 	champ_quotes = []
-	html = requests.get(champ_link + '/Quotes')
+	html = requests.get(champ_link + '/Quotes')	# go to Quote page for easy parsing
 	soup = BeautifulSoup(html.text, 'html5lib')
 	for i in soup.find_all('i'):
-		print(i)
+		champ_quote = str(i.string)	# make thee quote a string
+		if champ_quote[0] is '"':	# remove non-quote or noise lines
+			champ_quotes.append(champ_quote)	# add quote to array
+	return champ_quotes
 
-get_champ_quotes('http://leagueoflegends.wikia.com/Aurelion_Sol')
+print(get_champ_quotes('http://leagueoflegends.wikia.com/Aurelion_Sol'))
 # def getChampImage(champ_link):
