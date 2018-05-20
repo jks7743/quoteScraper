@@ -5,6 +5,15 @@ for champion names, quotes and images using the BeautifulSoup4 and Requests
 packages. The program outputs the information to a google spreadsheet for use
 with the OKRammus API
 
+The program creates a list of dictionaries to be uploaded to an online database
+each entry has the format.
+	champ_dict:
+		str Name : 'champ_name'
+		str Link : 'champ_Link'
+		str Image : 'image_link'
+		str Quotes : ['"champ quote"',...]
+		str PrettyName : 'champ name'
+
 May 2018
 """
 __author__ = "Joshua Schenk"
@@ -14,26 +23,25 @@ import html5lib
 from bs4 import BeautifulSoup
 
 """
-Create a list of wiki links to all the champions listed in the league of legends
-wikia page by using BeautifulSoup4 to scrape the page
+Constructs a list of dictionaries represnting all the champions listed in the
+league of legendswikia page
 http://leagueoflegends.wikia.com/wiki/List_of_champions
 
 :return: 
-	a list of dictionaries representing champions
+	a list of dictionaries that are internal representations of champions
 		dict:
 			str Name : 'champ_name'
 			str Link : 'champ_Link'
-			str Quotes : ['"champ quote"',...]
 			str Image : 'image_link'
+			str Quotes : ['"champ quote"',...]
 			str PrettyName : 'champ name'
 """
 def get_champs():
 	champ_links = []
-	i = 0
 	source = 'http://leagueoflegends.wikia.com/wiki/List_of_champions'
 	html = requests.get(source)
 	champ_soup = BeautifulSoup(html.text, 'html5lib')
-	champ_table = champ_soup.find('table', class_='wikitable sortable')
+	champ_table = champ_soup.find('table', class_='wikitable sortable')	# find the right table
 	champList = champ_table.find("tbody")
 	for tr in champList.find_all('tr'):
 		champ_dict = {}
@@ -43,7 +51,7 @@ def get_champs():
 		champ_links.append(champ_dict)
 		champ_dict['Link'] = 'http://leagueoflegends.wikia.com' + page_link	# format link
 		# champ_dict['Quotes'] = get_champ_quotes(champ_dict['Link'])	# get champ quotes
-	del champ_links[0]	# delete unnecessary link
+	del champ_links[0]	# delete unnecessary link due to table formating
 	return champ_links
 
 """
