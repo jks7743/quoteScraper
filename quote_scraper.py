@@ -18,18 +18,24 @@ Create a list of wiki links to all the champions listed in the league of legends
 wikia page by using BeautifulSoup4 to scrape the page
 http://leagueoflegends.wikia.com/wiki/List_of_champions
 
-:return: a list of links to champion wikia pages
+:return: a list of links to champion wikia pages paired with the champion's name
 """
 def get_champs():
 	champ_links = []
+	i = 0
 	source = 'http://leagueoflegends.wikia.com/wiki/List_of_champions'
 	html = requests.get(source)
 	champ_soup = BeautifulSoup(html.text, 'html5lib')
 	champ_table = champ_soup.find('table', class_='wikitable sortable')
 	champList = champ_table.find("tbody")
 	for tr in champList.find_all('tr'):
+		champ_dict = {}
 		champ_data = tr.find('a')
-		champ_links.append('http://leagueoflegends.wikia.com' + champ_data.get('href'))	# format link
+		page_link = str(champ_data.get('href'))
+		champ_dict['Name'] = page_link.rsplit('/')[2]
+		champ_links.append(champ_dict)
+		champ_dict['Link'] = 'http://leagueoflegends.wikia.com' + page_link	# format link
+		# champ_dict['Quotes'] = get_champ_quotes(champ_dict['Link'])
 	del champ_links[0]	# delete unnecessary link
 	return champ_links
 
@@ -50,5 +56,13 @@ def get_champ_quotes(champ_link):
 			champ_quotes.append(champ_quote)	# add quote to array
 	return champ_quotes
 
-print(get_champ_quotes('http://leagueoflegends.wikia.com/Aurelion_Sol'))
+print(get_champs())
+
+"""
+Finds a link to the image of a champion based on a given link
+
+:param champ_link: a link to a champions wikia page
+:return: link to the image of a champion
+"""
 # def getChampImage(champ_link):
+	
