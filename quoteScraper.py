@@ -32,3 +32,20 @@ def getChamps():
 		champLinks.append('http://leagueoflegends.wikia.com' + champData.get('href'))	# format link
 	del champLinks[0]	# delete unnecessary link
 	return champLinks
+
+"""
+Function finds and returns a list of all the quotes a champion has based on a
+given wikia link
+
+:param champLink: a link to a champions wikia page
+:return: a list of champion quotes
+"""
+def getChampQuotes(champLink):
+	champQuotes = []
+	html = requests.get(champLink + '/Quotes')
+	soup = BeautifulSoup(html.text, 'html5lib')
+	for i in soup.find_all('i'):
+		print(i)
+
+getChampQuotes('http://leagueoflegends.wikia.com/Aurelion_Sol')
+# def getChampImage(champLink):
