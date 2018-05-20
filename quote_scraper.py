@@ -1,5 +1,5 @@
 """
-A Web Scrapper program used to scrape
+A web scraper program used to scrape
 http://leagueoflegends.wikia.com/wiki/List_of_champions
 for champion names, quotes and images using the BeautifulSoup4 and Requests
 packages. The program outputs the information to a google spreadsheet for use
@@ -20,32 +20,32 @@ http://leagueoflegends.wikia.com/wiki/List_of_champions
 
 :return: a list of links to champion wikia pages
 """
-def getChamps():
-	champLinks = []
+def get_champs():
+	champ_links = []
 	source = 'http://leagueoflegends.wikia.com/wiki/List_of_champions'
 	html = requests.get(source)
-	champSoup = BeautifulSoup(html.text, 'html5lib')
-	champTable = champSoup.find('table', class_='wikitable sortable')
-	champList = champTable.find("tbody")
+	champ_soup = BeautifulSoup(html.text, 'html5lib')
+	champ_table = champ_soup.find('table', class_='wikitable sortable')
+	champList = champ_table.find("tbody")
 	for tr in champList.find_all('tr'):
-		champData = tr.find('a')
-		champLinks.append('http://leagueoflegends.wikia.com' + champData.get('href'))	# format link
-	del champLinks[0]	# delete unnecessary link
-	return champLinks
+		champ_data = tr.find('a')
+		champ_links.append('http://leagueoflegends.wikia.com' + champ_data.get('href'))	# format link
+	del champ_links[0]	# delete unnecessary link
+	return champ_links
 
 """
 Function finds and returns a list of all the quotes a champion has based on a
 given wikia link
 
-:param champLink: a link to a champions wikia page
+:param champ_link: a link to a champions wikia page
 :return: a list of champion quotes
 """
-def getChampQuotes(champLink):
-	champQuotes = []
-	html = requests.get(champLink + '/Quotes')
+def get_champ_quotes(champ_link):
+	champ_quotes = []
+	html = requests.get(champ_link + '/Quotes')
 	soup = BeautifulSoup(html.text, 'html5lib')
 	for i in soup.find_all('i'):
 		print(i)
 
-getChampQuotes('http://leagueoflegends.wikia.com/Aurelion_Sol')
-# def getChampImage(champLink):
+get_champ_quotes('http://leagueoflegends.wikia.com/Aurelion_Sol')
+# def getChampImage(champ_link):
