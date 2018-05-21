@@ -24,7 +24,7 @@ from bs4 import BeautifulSoup
 
 """
 Constructs a list of dictionaries represnting all the champions listed in the
-league of legendswikia page
+league of legends wikia page
 http://leagueoflegends.wikia.com/wiki/List_of_champions
 
 :return: 
