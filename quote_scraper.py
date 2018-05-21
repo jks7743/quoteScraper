@@ -31,7 +31,7 @@ http://leagueoflegends.wikia.com/wiki/List_of_champions
 	a list of dictionaries that are internal representations of champions
 		dict:
 			str Name : 'champ_name'
-			str Link : 'champ_Link'
+			str Link : 'champ_link'
 			str Image : 'image_link'
 			str Quotes : ['"champ quote"',...]
 			str PrettyName : 'champ name'
@@ -42,7 +42,7 @@ def get_champs():
 	html = requests.get(source)
 	champ_soup = BeautifulSoup(html.text, 'html5lib')
 	champ_table = champ_soup.find('table', class_='wikitable sortable')	# find the right table
-	champList = champ_table.find("tbody")
+	champList = champ_table.find('tbody')
 	for tr in champList.find_all('tr'):
 		champ_dict = {}
 		champ_data = tr.find('a')
@@ -50,8 +50,11 @@ def get_champs():
 		champ_dict['Name'] = page_link.rsplit('/')[2]	# get a link formated version of a champions name
 		champ_links.append(champ_dict)
 		champ_dict['Link'] = 'http://leagueoflegends.wikia.com' + page_link	# format link
-		# champ_dict['Quotes'] = get_champ_quotes(champ_dict['Link'])	# get champ quotes
 	del champ_links[0]	# delete unnecessary link due to table formating
+	for champ in champ_links:
+		champ['Image'] = get_champ_image(champ)
+		champ['Quotes'] = get_champ_quotes(champ)	# get champ quotes
+		# champ['Quotes'] = get_champ_quotes(champ_dict)	# get champ quotes
 	return champ_links
 
 """
@@ -68,17 +71,22 @@ def get_champ_quotes(champ_dict):
 	soup = BeautifulSoup(html.text, 'html5lib')
 	for i in soup.find_all('i'):
 		champ_quote = str(i.string)	# make thee quote a string
-		if champ_quote[0] is '"':	# remove non-quote or noise lines
+		if champ_quote[0] is '"':	# filter out non-quote or noise lines
 			champ_quotes.append(champ_quote)	# add quote to array
 	return champ_quotes
 
-print(get_champs())
-
 """
-Finds a link to the image of a champion based on a given link
+Finds a link to the image of a champion based on a given dictionary
 
 :param champ_link: a link to a champions wikia page
 :return: link to the image of a champion
 """
-# def getChampImage(champ_link):
-	
+def get_champ_image(champ_dict):
+	print(champ_dict['Name'])
+	champ_image_link = 'http://leagueoflegends.wikia.com/wiki' + '/File:' + champ_dict['Name'] + '_OriginalSkin.jpg'
+	html = requests.get(champ_image_link)
+	soup = BeautifulSoup(html.text, 'html5lib')
+	image_parent = soup.find('div', class_='fullImageLink')
+	image_link = image_parent.find('a')
+	image = image_link.get('href')
+	return image
