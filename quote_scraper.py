@@ -54,7 +54,7 @@ def get_champs():
 	for champ in champ_links:
 		champ['Image'] = get_champ_image(champ)
 		champ['Quotes'] = get_champ_quotes(champ)	# get champ quotes
-		# champ['Quotes'] = get_champ_quotes(champ_dict)	# get champ quotes
+		champ['PrettyName'] = get_pretty_name(champ)
 	return champ_links
 
 """
@@ -78,7 +78,7 @@ def get_champ_quotes(champ_dict):
 """
 Finds a link to the image of a champion based on a given dictionary
 
-:param champ_link: a link to a champions wikia page
+:param champ_dict: a dictionary entry of a champion
 :return: link to the image of a champion
 """
 def get_champ_image(champ_dict):
@@ -90,3 +90,18 @@ def get_champ_image(champ_dict):
 	image_link = image_parent.find('a')
 	image = image_link.get('href')
 	return image
+
+"""
+Small helper function that replaces underscores and %27 with space and '
+characters and returns the pretty string
+
+:param champ_dict: a dictionary entry of a champion
+:return: a pretty version of a champions name
+"""
+def get_pretty_name(champ_dict):
+	champ_name = str(champ_dict['Name'])
+	pretty_name = champ_name.replace('_', ' ')
+	pretty_name = pretty_name.replace('%27','\'')
+	return pretty_name
+
+print(get_champs())
