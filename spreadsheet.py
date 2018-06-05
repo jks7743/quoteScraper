@@ -2,6 +2,8 @@
 Small script that uploads quotes scraped by quote_scraper.py to a google spreadsheet named
 League Quotes. This requires the use of the Google Drive API and a .json file named
 client_secret.json with the credentials to run.
+
+June 2018
 """
 __author__ = "Joshua Schenk"
 
@@ -23,5 +25,5 @@ index = 2
 for champ in champ_list:
 	row = [ champ['Name'], champ['Link'], champ['Image'], ','.join(champ['Quotes']), champ['PrettyName'] ]
 	quote_sheet.insert_row(row, index)
-	time.sleep(10)
+	time.sleep(6)
 	index += 1
