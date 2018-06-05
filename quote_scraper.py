@@ -103,5 +103,3 @@ def get_pretty_name(champ_dict):
 	pretty_name = champ_name.replace('_', ' ')
 	pretty_name = pretty_name.replace('%27','\'')
 	return pretty_name
-
-print(get_champs())
