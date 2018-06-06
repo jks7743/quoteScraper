@@ -13,3 +13,5 @@ client = gspread.authorize(credentials)
 quote_sheet = client.open("League Quotes").sheet1
 
 champ_list = get_champs()
+
+# for champ in champ_list:
