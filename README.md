@@ -3,7 +3,7 @@ This is a web-scraper application for future use in [OKrammus](https://github.co
 
 champ_dict:
 	str Name : 'champ_name'
-	str Link : 'champ_Link'
+	str Link : 'champ_Link'	
 	str Image : 'image_link'
 	str Quotes : ['"champ quote"',...]
 	str PrettyName : 'champ name'
