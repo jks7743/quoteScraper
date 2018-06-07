@@ -1,12 +1,5 @@
 # quote_scraper
-This is a web-scraper application for future use in [OKrammus](https://github.com/htmercury/OKrammus). This python script scrapes the [League of Legends wikia](http://leagueoflegends.wikia.com/wiki/Wiki) for champion information and builds a list of dictionaries with the following format
-
-champ_dict:
-	str Name : 'champ_name'
-	str Link : 'champ_Link'	
-	str Image : 'image_link'
-	str Quotes : ['"champ quote"',...]
-	str PrettyName : 'champ name'
+This is a web-scraper application for future use in [OKrammus](https://github.com/htmercury/OKrammus). This python script scrapes the [League of Legends wikia](http://leagueoflegends.wikia.com/wiki/Wiki) for champion information and builds a list of dictionaries containing champion: Names, Links, Quotes, and Images. The dictionary also includes a prettified version of the name.
 
 
 This repo includes seperate scraper and upload scripts
