@@ -21,18 +21,18 @@ champ_list = get_champs()
 index = 2
 
 for champ in champ_list:
-	champName = quote_sheet.cell(index, 0, value_render_option='UNFORMATTED VALUE')
+	champName = quote_sheet.cell(index, 1, value_render_option='UNFORMATTED_VALUE')
 	if champName != champ['Name']:
 		row = [ champ['Name'], champ['Link'], champ['Image'], ','.join(champ['Quotes']), champ['PrettyName'] ]
 		quote_sheet.insert_row(row, index)
 		index += 1
 	else:
-		champLink = quote_sheet.cell(index, 1, value_render_option='UNFORMATTED VALUE')
-		champImage = quote_sheet.cell(index, 2, value_render_option='UNFORMATTED VALUE')
-		champQuotes = quote_sheet.cell(index, 3, value_render_option='UNFORMATTED VALUE')
+		champLink = quote_sheet.cell(index, 2, value_render_option='UNFORMATTED_VALUE')
+		champImage = quote_sheet.cell(index, 3, value_render_option='UNFORMATTED_VALUE')
+		champQuotes = quote_sheet.cell(index, 4, value_render_option='UNFORMATTED_VALUE')
 		if champ['Link'] != champLink:
-			quote_sheet.update_cell(index, 1, champ['Link'])
+			quote_sheet.update_cell(index, 2, champ['Link'])
 		if champ['Image'] != champImage:
-			quote_sheet.update_cell(index, 2, champ['Image'])
+			quote_sheet.update_cell(index, 3, champ['Image'])
 		if ','.join(champ['Quotes']) != champQuotes:
-			quote_sheet.update_cell(index, 3, ','.join(champ['Quotes']))
+			quote_sheet.update_cell(index, 4, ','.join(champ['Quotes']))
