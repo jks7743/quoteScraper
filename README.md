@@ -3,7 +3,7 @@ This is a web-scraper application for future use in [OKrammus](https://github.co
 
 
 This repo includes seperate scraper and upload scripts
-* Uses python3, Beautifulsoup4, requests, html5lib, gpspread, time, and oauth2client libraries
+* Uses Beautifulsoup4, requests, html5lib, gpspread, time, and oauth2client libraries
 * Requires Google Spreadsheets API credentials (this script accounts for default read and write limitations)
 
 ## Getting Started
