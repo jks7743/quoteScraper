@@ -33,6 +33,6 @@ for champ in champ_list:
 		if champ['Link'] != champLink:
 			quote_sheet.update_cell(index, 1, champ['Link'])
 		if champ['Image'] != champImage:
-			quote_sheet.update_cell(index, 1, champ['Image'])
+			quote_sheet.update_cell(index, 2, champ['Image'])
 		if ','.join(champ['Quotes']) != champQuotes:
-			quote_sheet.update_cell(index, 1, ','.join(champ['Quotes']))
+			quote_sheet.update_cell(index, 3, ','.join(champ['Quotes']))
