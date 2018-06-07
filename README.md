@@ -10,5 +10,5 @@ This repo includes seperate scraper and upload scripts
 //TODO
 
 ## Planned Features
-* Find a way to more effiecient way scrape data and update the database
+* Find a way to more efficient way scrape data and update the database
 * Quote filters?
